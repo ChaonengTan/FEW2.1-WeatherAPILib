@@ -74,7 +74,9 @@
       </form>
     </div>
 
-    <script>
+    <script type="module">
+      import { getWeather } from './functions.js'
+      import { apiKey } from './env.js'
       // ------------------------------------------------------
       // Developer Code
 
@@ -88,22 +90,21 @@
       formEl.addEventListener('submit', (e) => {
         e.preventDefault()
         const zip = zipInput.value
-        getWeather(zip)
-      })
 
-      // Functions 
-    function getWeather(zip) {
-        const apiKey = '467355df4c808dd6134a3b64e9ace282'
-        const units = 'imperial'
-        const path = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${apiKey}&units=${units}`
-        fetch(path)
-          .then(res => res.json())
-          .then(json => {
-            tempEl.innerHTML = json.main.temp
-            descEl.innerHTML = json.weather[0].description
+        // getWeather(apiKey, zip, 'imperial', (data) => {
+        //   tempEl.innerHTML = data.main.temp
+        //   descEl.innerHTML = data.weather[0].description
+        // })
+
+        getWeather(apiKey, zip, 'imperial')
+          .then((data) => {
+            console.log(data)
+            tempEl.innerHTML = data.main.temp
+            descEl.innerHTML = data.weather[0].description
           })
           .catch(err => console.log(err.message))
-      }
+          
+      })
            
     </script>
   </body>
