@@ -89,3 +89,5 @@ typings/
 
 # self stuff
 env.js
+.vscode
+instructions.md
