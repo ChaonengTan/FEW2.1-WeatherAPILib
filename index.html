@@ -56,6 +56,12 @@
   </head>
   <body>
     <div class="container">
+      <p id="city">
+        <!-- city -->
+      </p>
+      <p id="country">
+        <!-- country -->
+      </p>
       <h1 id="temp">
         <!--Temp -->
       </h1>
@@ -75,12 +81,14 @@
     </div>
 
     <script type="module">
-      import { getWeather, obtainWeather } from './functions.js'
+      import { getWeatherZip, obtainWeatherZip, getWeatherGeo, obtainWeatherGeo, getWeatherCity, obtainWeatherCity, } from './functions.js'
       import { apiKey } from './env.js'
       // ------------------------------------------------------
       // Developer Code
 
       // Get Element refererences
+      const cityEL = document.getElementById('city')
+      const countryEL = document.getElementById('country')
       const tempEl = document.getElementById('temp')
       const descEl = document.getElementById('desc')
       const formEl = document.getElementById('form')
@@ -91,21 +99,22 @@
         e.preventDefault()
         const zip = zipInput.value
 
-        // getWeather(apiKey, zip, 'imperial', (data) => {
+        // getWeatherZip(apiKey, zip, 'imperial', (data) => {
         //   tempEl.innerHTML = data.main.temp
         //   descEl.innerHTML = data.weather[0].description
         // })
 
-        // getWeather(apiKey, zip, 'imperial')
+        // getWeatherZip(apiKey, zip, 'imperial')
         //   .then((data) => {
         //     console.log(data)
         //     tempEl.innerHTML = data.main.temp
         //     descEl.innerHTML = data.weather[0].description
         //   })
 
-        obtainWeather(apiKey, zip, 'imperial')
+        obtainWeatherZip(apiKey, zip, 'imperial')
           .then((data) => {
-            console.log(data)
+            cityEL.innerHTML = data.city
+            countryEL.innerHTML = data.country
             tempEl.innerHTML = data.temp
             descEl.innerHTML = data.description
           })
