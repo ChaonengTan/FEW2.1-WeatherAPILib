@@ -75,7 +75,7 @@
     </div>
 
     <script type="module">
-      import { getWeather } from './functions.js'
+      import { getWeather, obtainWeather } from './functions.js'
       import { apiKey } from './env.js'
       // ------------------------------------------------------
       // Developer Code
@@ -96,14 +96,19 @@
         //   descEl.innerHTML = data.weather[0].description
         // })
 
-        getWeather(apiKey, zip, 'imperial')
+        // getWeather(apiKey, zip, 'imperial')
+        //   .then((data) => {
+        //     console.log(data)
+        //     tempEl.innerHTML = data.main.temp
+        //     descEl.innerHTML = data.weather[0].description
+        //   })
+
+        obtainWeather(apiKey, zip, 'imperial')
           .then((data) => {
             console.log(data)
-            tempEl.innerHTML = data.main.temp
-            descEl.innerHTML = data.weather[0].description
+            tempEl.innerHTML = data.temp
+            descEl.innerHTML = data.description
           })
-          .catch(err => console.log(err.message))
-          
       })
            
     </script>
